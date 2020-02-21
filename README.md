@@ -38,6 +38,11 @@ docker-compose build
 docker-compose up -d
 ```
 
+# Access Zabbix Server
+
+http://[hostname or address]/zabbix
+
+
 # remove servers
 
 ## STOP and REMOVE All Containers
@@ -56,10 +61,6 @@ docker-compose down
 docker ps -aq | xargs docker rm -f ; \
 docker images -aq | xargs docker rmi
 ```
-
-# Access Zabbix Server
-
-http://[hostname or address]/zabbix
 
 
 # Appendix
