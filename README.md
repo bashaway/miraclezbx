@@ -68,9 +68,9 @@ MIRACLE ZBX Server
 Username : Admin
 Password : zabbix
 
-![login](https://gyazo.com/e5dad608878444f09a813a7b61d36702)
+![login](https://gyazo.com/e5dad608878444f09a813a7b61d36702/raw)
 
-![dashboard](https://gyazo.com/f534a5024a819ea80c547398046037ca)
+![dashboard](https://gyazo.com/f534a5024a819ea80c547398046037ca/raw)
 
 
 # remove servers
