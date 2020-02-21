@@ -57,6 +57,9 @@ docker ps -aq | xargs docker rm -f ; \
 docker images -aq | xargs docker rmi
 ```
 
+# Access Zabbix Server
+
+http://[hostname or address]/zabbix
 
 
 # Appendix
