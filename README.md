@@ -1,6 +1,8 @@
-# Miracle ZBX docker compose
+Unofficial MIRACLE ZBX docker-compose.yml
 
-Network Parameters
+# Parameters
+
+Network
 
 |key|value|
 |:-:|:-:|
@@ -8,7 +10,7 @@ Network Parameters
 |subnet|-(dynamic)|
 |interface|br_zbx_nw|
 
-Container Parameters
+Container
 
 |server|app|address|listen|
 |:-:|:-:|:-:|:-:|
@@ -118,3 +120,6 @@ chmod +x /usr/local/bin/docker-compose
 
 # ref
 https://docs.docker.com/compose/install/
+https://www.miraclelinux.com/product-service/zabbix/oss/download
+https://www.miraclelinux.com/support/docs/zbx/c3b23g/view
+
