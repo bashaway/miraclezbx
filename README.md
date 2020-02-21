@@ -38,9 +38,32 @@ docker-compose build
 docker-compose up -d
 ```
 
-# Access Zabbix Server
+# Setup
+
+## Access Zabbix Server
 
 http://[hostname or address]/zabbix
+
+## Pre-installation
+
+MariaDB : Database
+
+|key|value|
+|:--:|:--:|
+|Database type|MySQL|
+|Database server|zbx_db|
+|Database port|default(3306)|
+|Database name|zabbix|
+|Database user|zabbix|
+|Database password|zbxpwd|
+        
+MIRACLE ZBX Server
+|key|value|
+|:--:|:--:|
+|MIRACLE ZBX server|zbx_sv|
+|MIRACLE ZBX server port|10051|
+|MIRACLE ZBX server name|zbx_sv|
+
 
 
 # remove servers
