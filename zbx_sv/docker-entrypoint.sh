@@ -1,11 +1,19 @@
 #!/bin/sh
 
-until mysqladmin -uzabbix -pzbxpwd -h zbx_db  ping ; do
-  sleep 1
+export DB_ZBX_USER=zabbix
+export DB_ZBX_PASS=zbxpwd
+export DB_ROOT_PASS=rootpwd
+
+until mysqladmin -u${DB_ZBX_USER} -p${DB_ZBX_PASS} -h zbx_db  ping ; do
+  sleep 5
 done
 
-if [ "`mysql -uzabbix -pzbxpwd  -h zbx_db zabbix  -e 'show tables'`" = "" ]  ; then
-  zcat /usr/share/doc/miracle-zbx-server-mysql/create.sql.gz  | mysql -uzabbix -pzbxpwd zabbix -h zbx_db
+if [ "`mysql -uroot -p${DB_ROOT_PASS} zabbix -h zbx_db -e 'show tables'`" = "" ]  ; then
+  mysql -e "create database zabbix character set utf8mb4 collate utf8mb4_bin " -uroot -p${DB_ROOT_PASS}  -h zbx_db
+  mysql -e "create user '${DB_ZBX_USER}'@'%' identified by '${DB_ZBX_PASS}'"   -uroot -p${DB_ROOT_PASS}  -h zbx_db
+  mysql -e "grant all privileges on zabbix.* to '${DB_ZBX_USER}'@'%'"          -uroot -p${DB_ROOT_PASS}  -h zbx_db
+  mysql -e "set global log_bin_trust_function_creators = ON"                   -uroot -p${DB_ROOT_PASS}  -h zbx_db
+  zcat /usr/share/doc/miracle-zbx-sql-scripts/mysql/create.sql.gz  | mysql -u${DB_ZBX_USER}  -p${DB_ZBX_PASS} zabbix -h zbx_db
 fi
 
 exec "$@"

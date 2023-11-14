@@ -1,50 +1,42 @@
-version: '3'
+version: '3.9'
 
 services:
   zbx_db:
-    build: ./zbx_db
+    image: mariadb:10.11
     container_name: zbx_db
     hostname: zbx_db
+    restart: always
     environment:
-      MARIADB_DATABASE: zabbix
-      MARIADB_USER: zabbix
-      MARIADB_PASSWORD: zbxpwd
-      MARIADB_ROOT_PASSWORD: rootpwd
+      #MARIADB_ROOT_PASSWORD: rootpwd
+      MYSQL_ROOT_PASSWORD: rootpwd
       TZ: 'Asia/Tokyo'
-    networks:
-      zbx_nw:
     ports:
       - "3306:3306"
 
   zbx_sv:
     build: ./zbx_sv
     container_name: zbx_sv
-    hostname: zbxa_sv
+    hostname: zbx_sv
     restart: always
-    networks:
-      zbx_nw:
     ports:
-      - 80:80
       - 10051:10051
-      - 161:161/udp
       - 162:162/udp
-    links:
-      - zbx_db
-    cap_add:
-      - SYS_ADMIN
-    security_opt:
-      - seccomp:unconfined
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     environment:
       TZ: 'Asia/Tokyo'
     depends_on:
       - zbx_db
 
-networks:
-  zbx_nw:
-    driver: bridge
-    driver_opts:
-      com.docker.network.bridge.enable_ip_masquerade: "true"
-      com.docker.network.bridge.host_binding_ipv4: "0.0.0.0"
-      com.docker.network.bridge.name: "br_zbx_nw"
+  zbx_web:
+    build: ./zbx_web
+    container_name: zbx_web
+    hostname: zbx_web
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      TZ: 'Asia/Tokyo'
+    depends_on:
+      - zbx_db
+      - zbx_sv
+
