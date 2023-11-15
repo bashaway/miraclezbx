@@ -25,7 +25,7 @@ git clone https://github.com/bashaway/miraclezbx
 ## Build and Start Containers
 ```
 cd miraclezbx
-docker compose -f docker-compose.yml up --build -d
+docker compose up --build -d
 ```
 
 # Setup
@@ -43,7 +43,7 @@ Password : zabbix
 
 ## Stop and remove containers, networks, images, and volumes
 ```
-docker-compose down --rmi all --volumes
+docker compose down --rmi all --volumes
 ```
 
 ## docker command : Clean Up All Container and Images
@@ -51,3 +51,4 @@ docker-compose down --rmi all --volumes
 docker ps -aq | xargs docker rm -f ; \
 docker images -aq | xargs docker rmi
 ```
+
