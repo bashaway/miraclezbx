@@ -4,7 +4,7 @@ export DB_ZBX_USER=zabbix
 export DB_ZBX_PASS=zbxpwd
 export DB_ROOT_PASS=rootpwd
 
-until mysqladmin -u${DB_ZBX_USER} -p${DB_ZBX_PASS} -h zbx_db  ping ; do
+until mysqladmin -uroot -p${DB_ROOT_PASS} -h zbx_db  ping ; do
   sleep 5
 done
 
